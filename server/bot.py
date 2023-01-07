@@ -10,6 +10,7 @@ class Bot:
         self.username = username
         self.password = password
         self.session = Client()
+        self.session.request_timeout = .1
 
     def fastcompare(self, tolookup):
         user_id = self.session.user_id_from_username(tolookup)
