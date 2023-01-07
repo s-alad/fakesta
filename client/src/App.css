@@ -1,38 +1,82 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding-left: 40px;
+  padding-right: 40px;
 }
-
-.App-link {
-  color: #61dafb;
+.app .punchline .fakesta {
+  font-size: 42px;
+  font-weight: 700;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app .punchline .info {
+  max-width: 600px;
+  font-size: 22px;
+  font-weight: 600;
 }
+.app .public {
+  margin-top: 40px;
+}
+.app .public .public-title {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  max-width: 600px;
+}
+.app .public .public-input {
+  display: flex;
+  flex-direction: row;
+}
+.app .public .public-input input {
+  height: 60px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.75rem 0.5rem;
+  text-decoration: none;
+  width: 490px;
+  color: #181818;
+  border: 3px solid #2b2c34;
+}
+.app .public .public-input button {
+  height: 60px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.75rem 0.5rem;
+  text-decoration: none;
+  border: none;
+  color: #fffffe;
+  background-color: #6246ea;
+  cursor: pointer;
+  width: 100px;
+  margin-left: 10px;
+}
+.app .private {
+  margin-top: 40px;
+}
+.app .private .private-title {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  max-width: 600px;
+}
+.app .private .private-subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  max-width: 600px;
+}
+.app .private button {
+  height: 60px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.75rem 0.5rem;
+  text-decoration: none;
+  border: none;
+  color: #fffffe;
+  background-color: #6246ea;
+  cursor: pointer;
+  width: 600px;
+  margin-top: 10px;
+}/*# sourceMappingURL=App.css.map */

@@ -1,0 +1,82 @@
+@use './shared/palette/palette.scss' as p;
+
+.app {
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+    padding-right: 40px;
+
+    .punchline {
+        .fakesta {
+            font-size: 42px;
+            font-weight: 700;
+        }
+        .info {
+            max-width: 600px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+    }
+
+    @mixin ptitle {
+        font-size: 22px;
+        font-weight: 500;
+        margin-bottom: 8px;
+        max-width: 600px;
+    }
+    @mixin inp {
+        height: 60px;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 0.75rem 0.5rem;
+        text-decoration: none;
+    }
+    .public {
+        margin-top: 40px;
+        .public-title {
+            @include ptitle;
+        }
+        .public-input {
+            display: flex;
+            flex-direction: row;
+            input {
+                @include inp;
+                width: 490px;
+                color: #181818;
+                border: 3px solid p.$stroke;
+            }
+            button {
+                @include inp;
+                border: none;
+                color: p.$primary;
+                background-color: p.$highlight;
+                cursor: pointer;
+                width: 100px;
+                margin-left: 10px;
+            }
+        }
+    }
+
+    .private {
+        margin-top: 40px;
+        .private-title {
+            @include ptitle;
+        }
+        .private-subtitle {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            max-width: 600px;
+        }
+        button {
+            @include inp;
+            border: none;
+            color: p.$primary;
+            background-color: p.$highlight;
+            cursor: pointer;
+            width: 600px;
+            margin-top: 10px;
+        }
+    }
+}
