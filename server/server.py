@@ -20,7 +20,14 @@ def slash():
 
 @app.route("/compare/<username>")
 def compare(username):
+    print(check())
     compared_set = bot.compare(tolookup=username)
+    return json.dumps(list(compared_set))
+
+@app.route("/fastcompare/<username>")
+def fastcompare(username):
+    print(check())
+    compared_set = bot.fastcompare(tolookup=username)
     return json.dumps(list(compared_set))
 
 @app.route("/pwd")
@@ -32,5 +39,5 @@ def check():
     return bot.check()
 
 if __name__ == '__main__':
-    app.run(port=5001, debug=True)
+    app.run(port=5000, debug=True)
     print('online')

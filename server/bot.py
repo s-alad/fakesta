@@ -11,6 +11,19 @@ class Bot:
         self.password = password
         self.session = Client()
 
+    def fastcompare(self, tolookup):
+        user_id = self.session.user_id_from_username(tolookup)
+        followers = self.session.user_followers_v1(user_id=user_id)
+        following = self.session.user_following_v1(user_id=user_id)
+        flwrs = []
+        flwng = []
+        for follower in followers:
+            flwrs.append(follower.username)
+        for following in following:
+            flwng.append(following.username)
+        
+        return set(flwng)-set(flwrs)
+
     def compare(self, tolookup):
         user_id = self.session.user_id_from_username(tolookup)
         followers = self.session.user_followers(user_id=user_id)
@@ -54,7 +67,7 @@ class Bot:
         return path.dirname(__file__)
 
     def check(self):
-        print(self.session.account_info())
+        return (self.session.account_info())
 
 if __name__ == '__main__':
     load_dotenv()
@@ -65,4 +78,4 @@ if __name__ == '__main__':
         bot.check()
     except Exception as e:
         print(e)
-    bot.compare(tolookup='csynikl')
+ 
