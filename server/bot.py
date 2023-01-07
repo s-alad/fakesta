@@ -21,7 +21,9 @@ class Bot:
             flwng.append(following.username)
         
         print("Followers: ", flwrs)
+        print('------------------------------------')
         print("Following: ", flwng)
+        print('------------------------------------')        
         print("People you follow but they don't follow you back: ", set(flwng)-set(flwrs))
 
     def login(self):
