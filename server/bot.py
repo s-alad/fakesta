@@ -1,4 +1,6 @@
+from dotenv import load_dotenv
 from instagrapi import Client
+import os
 from os import getcwd, mkdir, path, sep
 from random import choice
 
@@ -20,11 +22,16 @@ class Bot:
         for following in following.values():
             flwng.append(following.username)
         
+        print('------------------------------------')
+        print("username: ", tolookup, "user_id: ", user_id)
+        print('------------------------------------')
         print("Followers: ", flwrs)
         print('------------------------------------')
         print("Following: ", flwng)
         print('------------------------------------')        
         print("People you follow but they don't follow you back: ", set(flwng)-set(flwrs))
+
+        return set(flwng)-set(flwrs)
 
     def login(self):
         if not path.exists(path=path.dirname(__file__) + f'{sep}/files'):
@@ -34,10 +41,10 @@ class Bot:
         if path.exists(path=path.dirname(__file__) + sep + 'files' + sep + f'{self.username}.json'):
             print('[INFO]: Found saved session. Loading...')
             self.session.load_settings(path=path.dirname(__file__) + sep + 'files' + sep + f'{self.username}.json') # type: ignore
-            logged_in = self.session.login(username=self.username, password=self.password)
+            logged_in = self.session.login(username=self.username, password=self.password, relogin=True)
         else:
             print('[INFO]: No saved session found. Logging in...')
-            logged_in = self.session.login(username=self.username, password=self.password)
+            logged_in = self.session.login(username=self.username, password=self.password, relogin=True)
             self.session.dump_settings(path=path.dirname(__file__) + sep + 'files' + sep + f'{self.username}.json') # type: ignore
 
         print(f'[INFO]: Successfully logged in as: {self.session.username}.' if logged_in else '[ERROR]: Failed to log in.')
@@ -45,3 +52,17 @@ class Bot:
     def currentworkingdirectory(self):
         print(path.dirname(__file__))
         return path.dirname(__file__)
+
+    def check(self):
+        print(self.session.account_info())
+
+if __name__ == '__main__':
+    load_dotenv()
+    bot = Bot(username=os.getenv('account_name'), password=os.getenv('account_pass'))
+    bot.currentworkingdirectory()
+    try:
+        bot.login()
+        bot.check()
+    except Exception as e:
+        print(e)
+    bot.compare(tolookup='csynikl')
