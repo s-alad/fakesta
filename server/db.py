@@ -12,7 +12,7 @@ print(url, key)
 supabase: Client = create_client(url, key)
 
 
-def find():
+def find() -> dict:
     data = supabase.table(table).select("*").execute()
     # Equivalent for SQL Query "SELECT * FROM teamsTest;"
     if data != 0: return data
