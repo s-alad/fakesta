@@ -5,26 +5,42 @@ from supabase import create_client, Client
 from bot import Bot
 
 load_dotenv()
-url = os.getenv('SUPABASE_URL')
-key = os.getenv('SUPABASE_KEY')
-table = os.getenv('SUPABASE_TABLE')
-print(url, key)
-supabase: Client = create_client(url, key)
+
+class BotBase:
+    def __init__(self):
+        self.url = os.getenv('SUPABASE_URL')
+        self.key = os.getenv('SUPABASE_KEY')
+        self.table = os.getenv('SUPABASE_TABLE')
+        self.supabase: Client = create_client(self.url, self.key)
+
+    def find(self) -> dict:
+        data = self.supabase.table(self.table).select("*").execute()
+        # Equivalent for SQL Query "SELECT * FROM teamsTest;"
+        if data != 0: return data
+        else: return None
+
+    def getfirstbot(self) -> dict:
+        data = self.supabase.table(self.table).select("*").limit(1).execute()
+        if data != 0: return data
+        else: return None
+
+    def getlastbot(self) -> dict:
+        data = self.supabase.table(self.table).select("*").order(column='id', desc=True).limit(1).execute()
+        if data != 0: return data
+        else: return None
+
+    def insertbot(self, username: str, password: str):
+        print('INSERTING...')
+        return self.supabase.table(self.table).insert({"username": username, "password": password}).execute()
+
+    def deletebot(self, id):
+        print('DELETING...')
+        return self.supabase.table(self.table).delete().eq('id', id).execute()
 
 
-def find() -> dict:
-    data = supabase.table(table).select("*").execute()
-    # Equivalent for SQL Query "SELECT * FROM teamsTest;"
-    if data != 0: return data
-    else: return None
+if __name__ == '__main__':
+    botbase = BotBase()
+    print(botbase.find())
+    print(botbase.getfirstbot())
+    print(botbase.getlastbot())
 
-def insert(data):
-    print('INSETING...')
-    return supabase.table(table).insert(data).execute()
-
-def delete(id):
-    print('DELETING...')
-    return supabase.table(table).delete().eq('id', id).execute()
-
-teams = find() # Fetch all data
-print(teams.data)
