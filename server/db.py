@@ -16,11 +16,15 @@ def find():
     data = supabase.table(table).select("*").execute()
     # Equivalent for SQL Query "SELECT * FROM teamsTest;"
     if data != 0: return data
-    else: return 'insert data'
+    else: return None
 
 def insert(data):
-    print('Inserting...')
+    print('INSETING...')
     return supabase.table(table).insert(data).execute()
+
+def delete(id):
+    print('DELETING...')
+    return supabase.table(table).delete().eq('id', id).execute()
 
 teams = find() # Fetch all data
 print(teams.data)
