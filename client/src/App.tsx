@@ -9,7 +9,7 @@ function App() {
   function handlePublic() {
     console.log(username)
 
-    fetch(`/fastcompare/${username}`).then(
+    fetch(`/fastestcompare/${username}`).then(
       (res) => {
         return res.json()
       }).then(

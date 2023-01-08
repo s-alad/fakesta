@@ -3,6 +3,8 @@ from instagrapi import Client
 import os
 from os import getcwd, mkdir, path, sep
 from random import choice
+import time
+
 
 class Bot:
 
@@ -10,7 +12,20 @@ class Bot:
         self.username = username
         self.password = password
         self.session = Client()
-        self.session.request_timeout = .1
+        self.session.request_timeout = .25
+    
+    def fastestcompare(self, tolookup):
+        user_id = self.session.user_id_from_username(tolookup)
+        following = self.session.user_following_gql(user_id=user_id)
+        followers = self.session.user_followers_gql(user_id=user_id)
+        flwng = []
+        flwrs = []
+        for follow in following:
+            flwng.append(follow.username)
+        for follower in followers:
+            flwrs.append(follower.username)
+        print(flwng, flwrs)
+        return set(flwng)-set(flwrs)
 
     def fastcompare(self, tolookup):
         user_id = self.session.user_id_from_username(tolookup)
@@ -22,7 +37,8 @@ class Bot:
             flwrs.append(follower.username)
         for following in following:
             flwng.append(following.username)
-        
+        print('------------------------------------')
+        print(flwrs, flwng)
         return set(flwng)-set(flwrs)
 
     def compare(self, tolookup):
@@ -76,7 +92,7 @@ if __name__ == '__main__':
     bot.currentworkingdirectory()
     try:
         bot.login()
-        bot.check()
+        print(bot.fastestcompare('csynikl'))
     except Exception as e:
         print(e)
  
