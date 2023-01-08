@@ -16,6 +16,9 @@ class BotBase:
         data = self.supabase.table(self.table).select("*").execute()
         if data != 0: return data
         else: return None
+    
+    def getbot(self, id) -> dict:
+        data = self.supabase.table(self.table).select("*").eq('id', id).execute()
 
     def getfirstbot(self) -> dict:
         data = self.supabase.table(self.table).select("*").limit(1).execute()
@@ -48,8 +51,4 @@ if __name__ == '__main__':
     print(botbase.find())
     print(botbase.getfirstbot())
     print(botbase.getlastbot())
-    #print(botbase.insertbot('test', 'test'))
-    #print(botbase.find())
-    print(botbase.deletelastbot())
-    print(botbase.find())
 
