@@ -15,7 +15,6 @@ class BotBase:
 
     def find(self) -> dict:
         data = self.supabase.table(self.table).select("*").execute()
-        # Equivalent for SQL Query "SELECT * FROM teamsTest;"
         if data != 0: return data
         else: return None
 
