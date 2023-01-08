@@ -5,13 +5,20 @@ import os
 from dotenv import load_dotenv
 from flask import Flask
 
-app = Flask(__name__)
-#print(os.getenv('account_name'))
+from bot import Bot
+from db import BotBase
 
+app = Flask(__name__)
+print(os.getenv('account_name'))
+
+active_bots = BotBase()
+
+current_bot = active_bots.getfirstbot().data[0]
 
 #bot = Bot(username=os.getenv('account_name'), password=os.getenv('account_pass'))
-#bot.currentworkingdirectory()
-#bot.login()
+bot = Bot(username=current_bot['username'], password=current_bot['password'])
+bot.currentworkingdirectory()
+bot.login()
 
 @app.route("/")
 def slash():
