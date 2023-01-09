@@ -12,6 +12,27 @@
   font-weight: 700;
   color: white;
 }
+.navbar .link-items {
+  margin-left: 60px;
+  display: flex;
+}
+.navbar .link-items .link-item {
+  height: 38px;
+  margin-left: 15px;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: white;
+  text-decoration: underline;
+  transition: 0.3s ease;
+}
+.navbar .link-items .link-item:hover {
+  color: #d1d1e9;
+}
 .navbar .nav-items {
   display: flex;
   flex: 1;
