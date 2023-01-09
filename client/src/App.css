@@ -1,32 +1,36 @@
 .app {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   padding-left: 40px;
   padding-right: 40px;
+  padding-top: 40px;
 }
-.app .punchline .fakesta {
+.app .main-feature {
+  width: 50%;
+}
+.app .main-feature .punchline .fakesta {
   font-size: 42px;
   font-weight: 700;
 }
-.app .punchline .info {
+.app .main-feature .punchline .info {
   max-width: 600px;
   font-size: 22px;
   font-weight: 600;
 }
-.app .public {
+.app .main-feature .public {
   margin-top: 40px;
 }
-.app .public .public-title {
+.app .main-feature .public .public-title {
   font-size: 22px;
   font-weight: 500;
   margin-bottom: 8px;
   max-width: 600px;
 }
-.app .public .public-input {
+.app .main-feature .public .public-input {
   display: flex;
   flex-direction: row;
 }
-.app .public .public-input input {
+.app .main-feature .public .public-input input {
   height: 60px;
   border-radius: 5px;
   font-size: 1.1rem;
@@ -37,7 +41,7 @@
   color: #181818;
   border: 3px solid #2b2c34;
 }
-.app .public .public-input button {
+.app .main-feature .public .public-input button {
   height: 60px;
   border-radius: 5px;
   font-size: 1.1rem;
@@ -51,22 +55,22 @@
   width: 100px;
   margin-left: 10px;
 }
-.app .private {
+.app .main-feature .private {
   margin-top: 40px;
 }
-.app .private .private-title {
+.app .main-feature .private .private-title {
   font-size: 22px;
   font-weight: 500;
   margin-bottom: 8px;
   max-width: 600px;
 }
-.app .private .private-subtitle {
+.app .main-feature .private .private-subtitle {
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 8px;
   max-width: 600px;
 }
-.app .private button {
+.app .main-feature .private button {
   height: 60px;
   border-radius: 5px;
   font-size: 1.1rem;
@@ -79,4 +83,12 @@
   cursor: pointer;
   width: 600px;
   margin-top: 10px;
+}
+.app .extra-features {
+  width: 50%;
+}
+.app .extra-features .features {
+  background-color: #d1d1e9;
+  border-radius: 4px;
+  height: 100%;
 }/*# sourceMappingURL=App.css.map */
