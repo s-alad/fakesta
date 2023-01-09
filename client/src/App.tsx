@@ -45,7 +45,9 @@ function App() {
           </div>
         </div>
         <div className='extra-features'>
-          <div className='features'>Other Features</div>
+          <div className='features'>
+            <div className='features-title'>Other Features</div>
+          </div>
         </div>
       </div>
       <Footer></Footer>

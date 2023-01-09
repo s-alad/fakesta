@@ -90,6 +90,13 @@
             background-color: p.$secondary;
             border-radius: 4px;
             height: 100%;
+            padding: 30px 40px 30px 40px;
+
+            .features-title {
+                max-width: 600px;
+                font-size: 22px;
+                font-weight: 600;
+            }
         }
     }
 }

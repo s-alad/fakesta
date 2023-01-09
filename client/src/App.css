@@ -91,4 +91,10 @@
   background-color: #d1d1e9;
   border-radius: 4px;
   height: 100%;
+  padding: 30px 40px 30px 40px;
+}
+.app .extra-features .features .features-title {
+  max-width: 600px;
+  font-size: 22px;
+  font-weight: 600;
 }/*# sourceMappingURL=App.css.map */
