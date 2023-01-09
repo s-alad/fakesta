@@ -9,9 +9,28 @@
     flex-direction: row;
     height: 80px;
     background-color: p.$secondary;
+    color: p.$stroke;
+    padding-left: 40px;
+    padding-right: 40px;
+    align-items: center;
     
     .footer-items {
         display: flex;
         flex-direction: row;
+
+        .footer-item {
+            margin-left: 15px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: underline;
+            transition: .3s ease;
+            &:hover {
+                color: p.$highlight;
+            }
+        }
     }
 }
