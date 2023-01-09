@@ -1,0 +1,13 @@
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 80px;
+  background-color: #d1d1e9;
+}
+.footer .footer-items {
+  display: flex;
+  flex-direction: row;
+}/*# sourceMappingURL=footer.css.map */

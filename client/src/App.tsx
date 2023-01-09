@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Footer from './components/footer/footer';
 import Navbar from './components/navbar/navbar';
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           <div className='features'>Other Features</div>
         </div>
       </div>
+      <Footer></Footer>
     </>
   );
 }
