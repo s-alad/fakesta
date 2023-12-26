@@ -1,5 +1,7 @@
+from typing import Dict
 from dotenv import load_dotenv
 from instagrapi import Client
+from instagrapi.types import UserShort
 import os
 from os import getcwd, mkdir, path, sep
 from random import choice
@@ -13,45 +15,8 @@ class Bot:
         self.password = password
         self.session = Client()
         self.session.request_timeout = .25
-    
-    def fastestcompare(self, tolookup):
-        user_id = self.session.user_id_from_username(tolookup)
-        following = self.session.user_following_gql(user_id=user_id)
-        followers = self.session.user_followers_gql(user_id=user_id)
-        flwng = []
-        flwrs = []
-        for follow in following:
-            flwng.append(follow.username)
-        for follower in followers:
-            flwrs.append(follower.username)
-        print(flwng, flwrs)
-        return set(flwng)-set(flwrs)
 
-    def fastcompare(self, tolookup):
-        user_id = self.session.user_id_from_username(tolookup)
-        followers = self.session.user_followers_v1(user_id=user_id)
-        following = self.session.user_following_v1(user_id=user_id)
-        flwrs = []
-        flwng = []
-        for follower in followers:
-            flwrs.append(follower.username)
-        for following in following:
-            flwng.append(following.username)
-        print('------------------------------------')
-        print(flwrs, flwng)
-        return set(flwng)-set(flwrs)
-
-    def compare(self, tolookup):
-        user_id = self.session.user_id_from_username(tolookup)
-        followers = self.session.user_followers(user_id=user_id)
-        following = self.session.user_following(user_id=user_id)
-        flwrs = []
-        flwng = []
-        for follower in followers.values():
-            flwrs.append(follower.username)
-        for following in following.values():
-            flwng.append(following.username)
-        
+    def printdetails(self, tolookup, user_id, flwrs, flwng):
         print('------------------------------------')
         print("username: ", tolookup, "user_id: ", user_id)
         print('------------------------------------')
@@ -60,6 +25,38 @@ class Bot:
         print("Following: ", flwng)
         print('------------------------------------')        
         print("People you follow but they don't follow you back: ", set(flwng)-set(flwrs))
+        print('------------------------------------')
+    
+    def fastestcompare(self, tolookup: str):
+        user_id = self.session.user_id_from_username(tolookup)
+        following = self.session.user_following_gql(user_id=user_id)
+        followers = self.session.user_followers_gql(user_id=user_id)
+        flwng = [follow.username for follow in following]
+        flwrs = [follower.username for follower in followers]
+
+        self.printdetails(tolookup, user_id, flwrs, flwng)
+        
+        return set(flwng)-set(flwrs)
+
+    def fastcompare(self, tolookup: str):
+        user_id = self.session.user_id_from_username(tolookup)
+        followers = self.session.user_followers_v1(user_id=user_id)
+        following = self.session.user_following_v1(user_id=user_id)
+        flwrs = [follower.username for follower in followers]
+        flwng = [following.username for following in following]
+        
+        self.printdetails(tolookup, user_id, flwrs, flwng)
+
+        return set(flwng)-set(flwrs)
+
+    def compare(self, tolookup: str):
+        user_id = self.session.user_id_from_username(tolookup)
+        followers: Dict[str, UserShort] = self.session.user_followers(user_id=user_id)
+        following = self.session.user_following(user_id=user_id)
+        flwrs = [ follower.username for follower in followers.values() ]
+        flwng = [ following.username for following in following.values() ]
+        
+        self.printdetails(tolookup, user_id, flwrs, flwng)
 
         return set(flwng)-set(flwrs)
 
@@ -92,7 +89,6 @@ if __name__ == '__main__':
     bot.currentworkingdirectory()
     try:
         bot.login()
-        print(bot.fastestcompare('csynikl'))
+        bot.compare(tolookup=os.getenv('lookup'))
     except Exception as e:
         print(e)
- 
