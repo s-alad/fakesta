@@ -9,7 +9,7 @@ from instagrapi.types import UserShort
 from os import mkdir, path, sep
 
 
-with open('../data/ignore.json') as f: people = json.load(f) 
+with open('./data/ignore.json') as f: people = json.load(f) 
 
 
 class Bot:
@@ -19,6 +19,20 @@ class Bot:
         self.password = password
         self.session = Client()
         self.session.request_timeout = .25
+        
+    def savedetails(self, tolookup, user_id, flwrs, flwng):
+        diff = set(flwng)-set(flwrs)
+        date = time.strftime('%Y-%m-%d')
+        with open(f'./data/{tolookup}-{date}.json', 'w') as f:
+            json.dump({
+                'username': tolookup,
+                'user_id': user_id,
+                'followers': flwrs,
+                'following': flwng,
+                'diff': list(diff),
+                'clean-diff': list(diff-set(people)),
+            }, f, indent=4)
+        print(f'[INFO]: Saved details for {tolookup} for {date}.')
 
     def printdetails(self, tolookup, user_id, flwrs, flwng):
         diff = set(flwng)-set(flwrs)
@@ -41,6 +55,7 @@ class Bot:
         flwrs = [follower.username for follower in followers]
 
         self.printdetails(tolookup, user_id, flwrs, flwng)
+        self.savedetails(tolookup, user_id, flwrs, flwng)   
         
         return set(flwng)-set(flwrs)
 
@@ -52,6 +67,7 @@ class Bot:
         flwng = [following.username for following in following]
         
         self.printdetails(tolookup, user_id, flwrs, flwng)
+        self.savedetails(tolookup, user_id, flwrs, flwng)
 
         return set(flwng)-set(flwrs)
 
@@ -63,6 +79,7 @@ class Bot:
         flwng = [ following.username for following in following.values() ]
         
         self.printdetails(tolookup, user_id, flwrs, flwng)
+        self.savedetails(tolookup, user_id, flwrs, flwng)
 
         return set(flwng)-set(flwrs)
 
