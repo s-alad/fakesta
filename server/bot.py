@@ -1,11 +1,15 @@
+import os
+import time
+import json 
+
 from typing import Dict
 from dotenv import load_dotenv
 from instagrapi import Client
 from instagrapi.types import UserShort
-import os
-from os import getcwd, mkdir, path, sep
-from random import choice
-import time
+from os import mkdir, path, sep
+
+
+with open('../data/ignore.json') as f: people = json.load(f) 
 
 
 class Bot:
@@ -17,6 +21,7 @@ class Bot:
         self.session.request_timeout = .25
 
     def printdetails(self, tolookup, user_id, flwrs, flwng):
+        diff = set(flwng)-set(flwrs)
         print('------------------------------------')
         print("username: ", tolookup, "user_id: ", user_id)
         print('------------------------------------')
@@ -24,8 +29,9 @@ class Bot:
         print('------------------------------------')
         print("Following: ", flwng)
         print('------------------------------------')        
-        print("People you follow but they don't follow you back: ", set(flwng)-set(flwrs))
+        print("People you follow but they don't follow you back: ", diff)
         print('------------------------------------')
+        print("People you follow but they don't follow you back with removals: ", diff-set(people))
     
     def fastestcompare(self, tolookup: str):
         user_id = self.session.user_id_from_username(tolookup)
